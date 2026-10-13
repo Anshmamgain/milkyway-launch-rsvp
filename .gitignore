@@ -1,0 +1,8 @@
+node_modules
+dist
+.DS_Store
+.taste-skill
+.vercel
+.env*
+# brand sources (brandbook PDF, reference video, poster) stay out of the public repo
+brand/

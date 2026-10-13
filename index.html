@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>MilkyWay Launch RSVP</title>
+  <meta name="description" content="RSVP for The MilkyWay Launch, Fri 16 Oct, 2:45 to 9:30 PM, Auditorium, 8th Floor, CDS Tower. For Masters' Union UG students. 300 seats." />
+  <meta name="theme-color" content="#000621" />
+  <meta property="og:title" content="RSVP: The MilkyWay Launch" />
+  <meta property="og:description" content="Masters' Union's first-ever UG fest starts here. Fri 16 Oct · CDS Tower · 300 seats." />
+  <meta property="og:image" content="assets/img/kv-moon.webp" />
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,300..800&family=Mozilla+Headline:wdth,wght@75..100,300..700&display=swap" rel="stylesheet" />
+  <script>document.documentElement.classList.add('js')</script>
+</head>
+<body>
+  <!-- the background: one canvas that morphs through the brandbook's patterns, one per step -->
+  <canvas class="scene" id="scene" aria-hidden="true"></canvas>
+  <div class="grain" aria-hidden="true"></div>
+  <div class="cursor" id="cursor" aria-hidden="true"><span class="cursor__star" data-svg="sym-explore"></span><span class="cursor__label" id="cursorLabel"></span></div>
+
+  <!-- countdown into the flow -->
+  <div class="loader" id="loader" aria-hidden="true">
+    <div class="loader__rays"></div>
+    <div class="loader__count" id="loaderCount">10</div>
+    <div class="loader__meta">
+      <span class="loader__mu" data-svg="mu-logo"></span>
+      <span class="loader__line">The MilkyWay Launch</span>
+    </div>
+    <div class="loader__bar"><i id="loaderBar"></i></div>
+  </div>
+
+  <p class="preview" id="previewTag" hidden>Preview · RSVPs are not saved yet</p>
+  <header class="bar">
+    <span class="bar__mu" data-svg="mu-logo" role="img" aria-label="Masters' Union University"></span>
+    <p class="seats" data-seats aria-live="polite"><i class="seats__dot" aria-hidden="true"></i><b data-seats-left>300</b><span class="seats__of">/<span data-seats-cap>300</span></span><span class="seats__label"> seats left</span></p>
+    <button class="bar__q" type="button" id="faqOpen" aria-haspopup="dialog">Questions</button>
+  </header>
+
+  <main class="flow" id="flow">
+    <img class="mascot" id="mascot" src="assets/img/pose2.webp" alt="" width="411" height="488" />
+
+    <!-- the RSVP -->
+    <form class="card" id="rsvpForm" novalidate aria-labelledby="q1">
+      <div class="card__top">
+        <p class="card__event"><span class="card__logo" data-svg="logo"></span><span>The Launch</span><span class="card__dot" aria-hidden="true">·</span><span>Fri 16 Oct</span><span class="card__dot" aria-hidden="true">·</span><span>2:45 PM</span><span class="card__dot" aria-hidden="true">·</span><span>CDS Tower, 8F</span></p>
+        <ol class="progress" aria-label="RSVP progress"><li class="is-on"></li><li></li><li></li><li></li><li></li></ol>
+      </div>
+
+      <label class="hp" aria-hidden="true">Company <input name="company" tabindex="-1" autocomplete="off" /></label>
+      <p class="waitbanner" id="waitBanner" hidden>All seats are taken. You can still RSVP to join the waitlist, and we’ll tell you the moment one opens up.</p>
+
+      <div class="steps">
+        <fieldset class="step is-active" data-step="1" data-mode="grid" data-pose="pose2">
+          <legend class="step__q" id="q1"><span class="step__kick">You're invited.</span> What name goes on your ticket?</legend>
+          <label class="field"><span class="sr">Full name</span><input id="f-name" name="name" autocomplete="name" placeholder="Your full name" required maxlength="40" /></label>
+          <p class="step__err">Type your name so we can print it on the ticket.</p>
+        </fieldset>
+
+        <fieldset class="step" data-step="2" data-mode="pulsar" data-pose="pose1">
+          <legend class="step__q">Your Masters' Union email.</legend>
+          <label class="field field--email"><span class="field__lab">MU email</span>
+            <span class="email"><input id="f-email" name="email" autocomplete="username" inputmode="email" placeholder="firstname.lastname" required maxlength="64" spellcheck="false" autocapitalize="off" /><span class="email__suffix">@mastersunion.org</span></span>
+          </label>
+          <label class="field"><span class="field__lab">Phone</span><input id="f-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="98765 43210" required maxlength="16" /></label>
+          <p class="step__err" id="contactErr">Use your @mastersunion.org email and a 10-digit phone number.</p>
+        </fieldset>
+
+        <fieldset class="step" data-step="3" data-mode="spiral" data-pose="pose3">
+          <legend class="step__q">Which batch are you in?</legend>
+          <div class="chips" role="radiogroup" aria-label="UG batch">
+            <label class="chip"><input type="radio" name="batch" value="UG Year 1" /><span><b>1</b>First year</span></label>
+            <label class="chip"><input type="radio" name="batch" value="UG Year 2" /><span><b>2</b>Second year</span></label>
+            <label class="chip"><input type="radio" name="batch" value="UG Year 3" /><span><b>3</b>Third year</span></label>
+            <label class="chip"><input type="radio" name="batch" value="UG Year 4" /><span><b>4</b>Fourth year</span></label>
+          </div>
+          <p class="step__err">Pick your batch.</p>
+        </fieldset>
+
+        <fieldset class="step" data-step="4" data-mode="aurora" data-pose="pose6">
+          <legend class="step__q">Bringing friends from MU?</legend>
+          <div class="crew">
+            <button type="button" class="crew__btn" data-crew="-1" aria-label="One friend fewer">−</button>
+            <output class="crew__n" id="crewN">0</output>
+            <button type="button" class="crew__btn" data-crew="1" aria-label="One more friend">+</button>
+            <p class="crew__say" id="crewSay">Just you. That's one seat.</p>
+          </div>
+          <div class="crew__names" id="crewNames"></div>
+        </fieldset>
+
+        <fieldset class="step" data-step="5" data-mode="chroma" data-pose="pose5">
+          <legend class="step__q">Which world pulls you in?</legend>
+          <div class="pick">
+            <label class="pick__w" style="--c:#506CD9"><input type="checkbox" name="worlds" value="Imagine" /><span><i data-svg="sym-imagine"></i>Imagine</span></label>
+            <label class="pick__w" style="--c:#D13F30"><input type="checkbox" name="worlds" value="Explore" /><span><i data-svg="sym-explore"></i>Explore</span></label>
+            <label class="pick__w" style="--c:#F6AAC8"><input type="checkbox" name="worlds" value="Create" /><span><i data-svg="sym-create"></i>Create</span></label>
+            <label class="pick__w" style="--c:#4DAA48"><input type="checkbox" name="worlds" value="Connect" /><span><i data-svg="sym-connect"></i>Connect</span></label>
+          </div>
+          <label class="field field--sm"><span class="field__lab">One thing Milky Way must have (optional)</span><input id="f-wish" name="wish" maxlength="120" placeholder="A silent disco on the roof" /></label>
+        </fieldset>
+      </div>
+
+      <div class="nav">
+        <button type="button" class="nav__back" id="back">Back</button>
+        <p class="nav__hint" id="hint">Press <kbd>Enter</kbd> ↵</p>
+        <button type="button" class="btn btn--gold" id="next"><span>Next</span><i data-svg="ic-forward"></i></button>
+        <button type="button" class="launch" id="launch" hidden>
+          <svg class="launch__ring" viewBox="0 0 120 120" aria-hidden="true"><circle cx="60" cy="60" r="54" /></svg>
+          <span class="launch__label">Hold to launch</span>
+        </button>
+      </div>
+    </form>
+
+    <!-- the ticket -->
+    <section class="done" id="done" hidden aria-labelledby="doneTitle">
+      <h1 class="done__title" id="doneTitle">You're in.</h1>
+      <div class="ticketwrap">
+        <article class="ticket" id="ticket" string="tilt" string-tilt-max="10">
+          <div class="ticket__head">
+            <div class="ticket__clip" aria-hidden="true"><div class="ticket__rays"></div></div>
+            <div class="ticket__row"><span class="ticket__status" id="tStatus">Admit 1</span></div>
+            <span class="ticket__logo" data-svg="logo3d"></span>
+            <p class="ticket__event">The Launch</p>
+            <img class="ticket__mascot" src="assets/img/pose3.webp" alt="" width="406" height="504" />
+          </div>
+          <div class="ticket__body">
+            <p class="ticket__lab">Passenger</p>
+            <p class="ticket__name" id="tName">Your name</p>
+            <p class="ticket__meta" id="tMeta">UG</p>
+            <dl class="ticket__grid">
+              <div><dt>Date</dt><dd>Fri 16 Oct</dd></div>
+              <div><dt>Doors</dt><dd>2:45 PM</dd></div>
+              <div><dt>Venue</dt><dd>Auditorium · 8F</dd></div>
+              <div><dt>Seats</dt><dd id="tSeats">1</dd></div>
+            </dl>
+            <div class="ticket__worlds" id="tWorlds" aria-label="Worlds"></div>
+          </div>
+          <div class="ticket__tear" aria-hidden="true"></div>
+          <div class="ticket__stub">
+            <canvas class="ticket__qr" id="tQr" width="132" height="132" aria-label="Check-in code"></canvas>
+            <div class="ticket__stubtext">
+              <p class="ticket__id" id="tId">MW-·····</p>
+              <p class="ticket__note" id="tNote">Show this at the door.</p>
+              <p class="ticket__count" id="tCount">Launch in --</p>
+            </div>
+          </div>
+          <div class="ticket__holo" aria-hidden="true"></div>
+        </article>
+      </div>
+      <p class="done__lede" id="doneLede">Your seat is held.</p>
+      <div class="done__actions">
+        <button class="btn btn--gold" id="dlPass" type="button"><i data-svg="ic-ticket"></i><span>Save ticket</span></button>
+        <button class="btn btn--ghost" id="calPass" type="button"><i data-svg="ic-date"></i><span>Add to calendar</span></button>
+        <button class="btn btn--ghost" id="sharePass" type="button"><i data-svg="ic-crew"></i><span>Send to friends</span></button>
+      </div>
+      <button class="done__edit" id="editRsvp" type="button">Edit my RSVP</button>
+    </section>
+  </main>
+
+  <!-- questions -->
+  <div class="sheet" id="faqSheet" role="dialog" aria-modal="true" aria-labelledby="faqTitle" hidden>
+    <div class="sheet__scrim" data-close-sheet></div>
+    <div class="sheet__panel">
+      <div class="sheet__head"><h2 class="sheet__title" id="faqTitle">Before you board</h2><button class="sheet__close" data-close-sheet aria-label="Close questions">✕</button></div>
+      <div class="faq__list">
+        <details class="q"><summary>What happens at the launch?<i></i></summary><div class="q__a"><p>We reveal the dates of Milky Way, Masters' Union's first-ever UG fest, and walk you through the vision. Be in the room when the dates drop.</p></div></details>
+        <details class="q"><summary>Who can RSVP?<i></i></summary><div class="q__a"><p>Masters' Union UG students, with your @mastersunion.org email. You can bring friends from MU on your RSVP.</p></div></details>
+        <details class="q"><summary>How many seats are there?<i></i></summary><div class="q__a"><p>300, and friends count as seats. The counter at the top is live. When it reaches zero you can still RSVP to join the waitlist, and we fill seats from it in order.</p></div></details>
+        <details class="q"><summary>Where and when?<i></i></summary><div class="q__a"><p>Friday 16 October, Auditorium, 8th floor, CDS Tower. Doors open at 2:45 PM and the evening runs until 9:30 PM.</p></div></details>
+        <details class="q"><summary>Can I change my RSVP?<i></i></summary><div class="q__a"><p>Yes. Tap "Edit my RSVP" on your ticket, or RSVP again with the same email. Your old entry is replaced, never doubled.</p></div></details>
+        <details class="q"><summary>Something else?<i></i></summary><div class="q__a"><p>Write to <b class="sel">milkyway@mastersunion.org</b> and a real human from the team will answer.</p></div></details>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <canvas class="warp" id="warp" aria-hidden="true"></canvas>
+
+  <script src="env.js"></script>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
