@@ -78,6 +78,15 @@ browser ──▶ Vercel (static site)
 - The old GitHub Pages build (milkyway2027.github.io) and the copy of the sheet on the client's Gmail are
   retired. Point every link at the Vercel URL.
 
+## Status (14 Oct 2026, 04:35 IST)
+
+Live at https://milkyway-launch.vercel.app. Tested against production: booking, same-email update (no
+duplicate), gmail refused (422), crew too big for the seats left (`too_many`), last seat, waitlist #1,
+seat count through `/api/seats`. Test rows deleted; the sheet is shared with milkyway@mastersunion.org.
+Open: Vercel has no GitHub login connection yet, so pushes to `main` do not auto-deploy until Ansh links
+GitHub in Vercel and the repo is connected. Until then deploy with `vercel deploy --prod`. The client
+collaborator invite is pending.
+
 ## Alternative backend (optional): Upstash Redis
 
 Add Upstash Redis to the Vercel project and `api/` switches to Redis booking automatically (`RESERVE_LUA`
